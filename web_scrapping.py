@@ -4,7 +4,7 @@ import time
 
 # Initialize Chrome driver
 driver = webdriver.Chrome()
-query = "mobiles"
+query = "laptops"
 
 driver.get(f"https://www.flipkart.com/search?q={query}")
 time.sleep(5)  # Wait for page to load
@@ -92,6 +92,7 @@ for url in urls:
         print(f"Best For (Features & Ratings): {best_for_dict}")
         print(f"Overall Rating: {overall_rating}")
         print(f"Star Ratings Breakdown: {star_dict}")
+        print(f"Product Link :{url}")
         print("-----------------------------------------------------")
     
     except Exception as e:
