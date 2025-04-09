@@ -98,5 +98,3 @@ for url in urls:
         continue
 
 driver.quit()
-
-
