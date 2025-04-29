@@ -235,11 +235,11 @@ def recommend_laptops(use_case, df, top_n=5, max_price=None):
     """
     # Refined mapping of use-case (desired recommendations) to cluster IDs
     cluster_map = {
-        "budget": 2,
+        "budget": 0,
         "programming": 1,
-        "design": 0,
-        "gaming": 3,
-        "portable": 4,
+        "design": 2,
+        "gaming": 4,
+        "portable": 3,
         "all-purpose": 1
     }
     use_case = use_case.lower()
@@ -259,23 +259,23 @@ def recommend_laptops(use_case, df, top_n=5, max_price=None):
     recs_sorted = recs.sort_values(by='price').head(top_n)
     
     return recs_sorted[[
-        'name', 'price', 'brand', 'processor', 'ram_gb', 
+        'name', 'price','brand', 'processor', 'ram_gb', 
         'graphics', 'storage_capacity_gb','storage_type', 'weight_kg','source','image_url', 'product_url'
     ]]
 
 
-def plot_clusters(df):
-    """
-    Plot the clusters using PCA-reduced features and use-case labels.
-    """
-    plt.figure(figsize=(10, 6))
-    sns.scatterplot(data=df, x='pca1', y='pca2', hue='use_case', palette='Set2',
-                    s=100, edgecolor="k")
-    plt.title("Laptop Clusters - PCA Visualization with Use-Case Labels")
-    plt.xlabel("Principal Component 1")
-    plt.ylabel("Principal Component 2")
-    plt.legend(title="Use Case", loc="best")
-    plt.show()
+# def plot_clusters(df):
+#     """
+#     Plot the clusters using PCA-reduced features and use-case labels.
+#     """
+#     plt.figure(figsize=(10, 6))
+#     sns.scatterplot(data=df, x='pca1', y='pca2', hue='use_case', palette='Set2',
+#                     s=100, edgecolor="k")
+#     plt.title("Laptop Clusters - PCA Visualization with Use-Case Labels")
+#     plt.xlabel("Principal Component 1")
+#     plt.ylabel("Principal Component 2")
+#     plt.legend(title="Use Case", loc="best")
+#     plt.show()
 
 
 # Main script execution
@@ -298,20 +298,20 @@ if __name__ == '__main__':
     print(df['cluster'].value_counts())
     
     # Perform PCA and add results to DataFrame for visualization
-    pca_result = perform_pca(X_preprocessed, n_components=2)
-    df['pca1'] = pca_result[:, 0]
-    df['pca2'] = pca_result[:, 1]
+    # pca_result = perform_pca(X_preprocessed, n_components=2)
+    # df['pca1'] = pca_result[:, 0]
+    # df['pca2'] = pca_result[:, 1]
     
     # Map clusters to use-case labels and plot
     df = map_clusters_to_use_cases(df)
     print(df[['name', 'price', 'cluster', 'use_case']].head(10))
     print("\nUse-case counts:")
     print(df['use_case'].value_counts())
-    plot_clusters(df)
+    # plot_clusters(df)
     
     # Test the recommendation function
     usecase="programming"
-    recs = recommend_laptops(usecase, df, top_n=10, max_price=50000)
+    recs = recommend_laptops(usecase, df, top_n=10, max_price=60000)
     print(f"\nRecommended Laptops for {usecase} Use-Case:")
     
     print(recs)
