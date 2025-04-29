@@ -5,6 +5,9 @@ from selenium.webdriver.common.by import By
 from pymongo import MongoClient
 from datetime import datetime 
 import time
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def scrape_flipkart(query,pages):
         option=webdriver.ChromeOptions()
@@ -12,7 +15,8 @@ def scrape_flipkart(query,pages):
         driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=option)
 
         # Initialize MongoDB client
-        client=MongoClient("mongodb://localhost:27017/")
+        mongo_uri = os.getenv("MONGO_URI")
+        client = MongoClient(mongo_uri)
         db=client["product_scraper"]
         collection=db["Flipkart_product_source"]
         
@@ -53,7 +57,8 @@ def scrape_amazon(query,pages):
         driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=option)
 
         # Initialize MongoDB client
-        client=MongoClient("mongodb://localhost:27017/")
+        mongo_uri = os.getenv("MONGO_URI")
+        client = MongoClient(mongo_uri)
         db=client["product_scraper"]
         collection=db["Amazon_product_source"]
         

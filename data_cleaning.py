@@ -1,16 +1,20 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 def amazon_structured_data(limit=None):
     print("🔍 Structuring Amazon products...")
-    client = MongoClient("mongodb://localhost:27017/")
+    mongo_uri = os.getenv("MONGO_URI")
+    client = MongoClient(mongo_uri)
     db = client["product_scraper"]
     source_collection = db["Amazon_product_source"]
     structured_collection = db["Amazon_structured_products"]
     count = 0
 
-    for i, doc in enumerate(source_collection.find({"category": "mobiles"})):
+    for i, doc in enumerate(source_collection.find({"category": "laptops"})):
         if limit and i >= limit:
             break
 
@@ -79,13 +83,14 @@ def amazon_structured_data(limit=None):
 
 def flipkart_structured_data(limit=None):
     print("🔍 Structuring Flipkart products...")
-    client = MongoClient("mongodb://localhost:27017/")
+    mongo_uri = os.getenv("MONGO_URI")
+    client = MongoClient(mongo_uri)
     db = client["product_scraper"]
     source_collection = db["Flipkart_product_source"]
     structured_collection = db["Flipkart_structured_products"]
     count = 0
 
-    for i, doc in enumerate(source_collection.find({"category": "mobiles"})):
+    for i, doc in enumerate(source_collection.find({"category": "laptops"})):
         if limit and i >= limit:
             break
 

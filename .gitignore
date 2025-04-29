@@ -1,0 +1,12 @@
+# Ignore Python cache and environment
+__pycache__/
+*.pyc
+.env
+
+# IDE/editor specific (optional)
+.vscode/
+.idea/
+
+# Ignore database or config files (optional)
+*.db
+config.json

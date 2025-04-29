@@ -1,15 +1,4 @@
-#!/usr/bin/env python
-"""
-ML-Based Laptop Recommendation System for Students
-
-This script loads laptop data from a MongoDB database (from Amazon and Flipkart),
-preprocesses and extracts product features, clusters the data using KMeans, and
-provides an API (using Flask) for recommendations based on a user's chosen use-case
-(e.g., budget, programming, design, gaming, portable, all-purpose).
-
-Author: Your Name
-Date: YYYY-MM-DD
-"""
+# -*- coding: utf-8 -*-
 
 import re
 import pandas as pd
@@ -21,6 +10,9 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 def load_and_preprocess_data():
@@ -28,7 +20,8 @@ def load_and_preprocess_data():
     Load structured laptop data from MongoDB collections and perform basic preprocessing.
     Returns a cleaned DataFrame containing laptops.
     """
-    client = MongoClient("mongodb://localhost:27017/")
+    mongo_uri = os.getenv("MONGO_URI")
+    client = MongoClient(mongo_uri)
     db = client["product_scraper"]
 
     # Load Amazon and Flipkart data
