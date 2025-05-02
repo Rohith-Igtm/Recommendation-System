@@ -238,8 +238,7 @@ def recommend_laptops(use_case, df, top_n=5, max_price=None):
         "budget": 2,
         "programming": 1,
         "design": 0,
-        "gaming": 4,
-        "portable": 3,
+        "gaming": 3,
         "all-purpose": 1
     }
     use_case = use_case.lower()
@@ -310,7 +309,7 @@ if __name__ == '__main__':
     # plot_clusters(df)
     
     # Test the recommendation function
-    usecase="design"
+    usecase="gaming"
     recs = recommend_laptops(usecase, df, top_n=10, max_price=30000)
     print(f"\nRecommended Laptops for {usecase} Use-Case:")
     
