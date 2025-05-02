@@ -235,9 +235,9 @@ def recommend_laptops(use_case, df, top_n=5, max_price=None):
     """
     # Refined mapping of use-case (desired recommendations) to cluster IDs
     cluster_map = {
-        "budget": 0,
+        "budget": 2,
         "programming": 1,
-        "design": 2,
+        "design": 0,
         "gaming": 4,
         "portable": 3,
         "all-purpose": 1
@@ -310,8 +310,8 @@ if __name__ == '__main__':
     # plot_clusters(df)
     
     # Test the recommendation function
-    usecase="programming"
-    recs = recommend_laptops(usecase, df, top_n=10, max_price=60000)
+    usecase="design"
+    recs = recommend_laptops(usecase, df, top_n=10, max_price=30000)
     print(f"\nRecommended Laptops for {usecase} Use-Case:")
     
     print(recs)
