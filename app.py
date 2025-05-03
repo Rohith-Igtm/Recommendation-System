@@ -64,7 +64,7 @@ def recommend():
 
 @app.route('/usecases', methods=['GET'])
 def get_use_cases():
-    return jsonify(["budget", "programming", "design", "gaming", "portable", "all-purpose"])
+    return jsonify(["budget", "programming", "design", "gaming", "all-purpose"])
 
 @app.route('/api/placeholder/<width>/<height>')
 def placeholder(width, height):
